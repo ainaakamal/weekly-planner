@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weekly Planner Website</title>
+        <link rel="stylesheet" href="styles.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,500;1,700;1,800&display=swap" rel="stylesheet">
+        
+    </head>
+
+    <body>
+
+        <nav class="sidebar">
+            <div class="date-box">
+                <div class="today-date">TODAY'S DATE</div>
+                <div class="date-style" id="currentDate"></div>
+            </div>
+
+            <div>
+                <div class="time-title">TIME</div>
+                <div class="current-time" id="currentTime"></div>
+            </div>
+
+            <div class="container">
+                <img class="cat-head" src="picture/cute-cat-waving-hand.png">
+                <div class="note-box">
+                    <label for="note">Note:</label>
+                    <textarea id="note" oninput="resizeTextarea()"></textarea>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <canvas id="weeklyChart"></canvas>
+            </div>
+            
+        </nav>
+
+        <main>
+
+            <div class="middle-section">
+                <h1 class="weekly-planner">WEEKLY PLANNER</h1>
+                <div><button class="reset-button" id="reset-button">RESET</button></div>
+            </div>
+
+            <section class="task-grid">
+
+                <div class="day-container" id="monday">
+                    <div class="day-style1">MONDAY</div>
+                    <div class="tasks-container" id="tasks-monday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-monday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('monday')">Add Task</button>
+                </div>
+    
+                <div class="day-container" id="tuesday">
+                    <div class="day-style2">TUESDAY</div>
+                    <div class="tasks-container" id="tasks-tuesday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-tuesday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('tuesday')">Add Task</button>
+                </div>
+
+                <div class="day-container" id="wednesday">
+                    <div class="day-style1">WEDNESDAY</div>
+                    <div class="tasks-container" id="tasks-wednesday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-wednesday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('wednesday')">Add Task</button>
+                </div>
+
+                <div class="day-container" id="thursday">
+                    <div class="day-style2">THURSDAY</div>
+                    <div class="tasks-container" id="tasks-thursday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-thursday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('thursday')">Add Task</button>
+                </div>
+
+                <div class="day-container" id="friday">
+                    <div class="day-style1">FRIDAY</div>
+                    <div class="tasks-container" id="tasks-friday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-friday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('friday')">Add Task</button>
+                </div>
+
+                <div class="day-container" id="saturday">
+                    <div class="day-style2">SATURDAY</div>
+                    <div class="tasks-container" id="tasks-saturday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-saturday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('saturday')">Add Task</button>
+                </div>
+
+                <div class="day-container" id="sunday">
+                    <div class="day-style1">SUNDAY</div>
+                    <div class="tasks-container" id="tasks-sunday"></div>
+                    <div class="progress-box">
+                        <div class="progress-percentage" id="progress-sunday">0%</div>
+                    </div>
+                    <button class="add-task-button" onclick="addTask('sunday')">Add Task</button>
+                </div>
+
+            </section>
+            
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="script.js"></script>
+       
+
+    </body>
+</html>
