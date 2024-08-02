@@ -59,11 +59,25 @@ function addTask(day) {
   tasksContainer.appendChild(newTask);
 
   const checkbox = newTask.querySelector('.task-complete');
-  checkbox.addEventListener('change', () => updateProgress(day));
+  checkbox.addEventListener('change', () =>
+  {
+    updateProgress(day);
+    saveTasks(); // Save tasks whenever a checkbox is changed
+  });
 
   updateProgress(day);
   updateChart();
+  saveTasks(); // Save tasks whenever a checkbox is changed
 }
+
+function removeTask(taskBox, day) {
+  taskBox.remove();
+  updateProgress(day);
+  saveTasks(); // Save tasks whenever a task is removed
+}
+
+// Load tasks when the page loads
+window.addEventListener('load', loadTasks);
 
 function resetTasks() {
   const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -119,3 +133,46 @@ function updateChart() {
 }
 
 updateChart();
+
+// Save tasks to localStorage
+function saveTasks() {
+  const tasks = {};
+  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  
+  days.forEach(day => {
+      const tasksContainer = document.getElementById(`tasks-${day}`);
+      const taskElements = tasksContainer.querySelectorAll('.task-box');
+      tasks[day] = Array.from(taskElements).map(taskBox => ({
+          title: taskBox.querySelector('.task-title').value,
+          time: taskBox.querySelector('.task-time').value,
+          completed: taskBox.querySelector('.task-complete').checked
+      }));
+  });
+  
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Load tasks from localStorage
+function loadTasks() {
+  const savedTasks = localStorage.getItem('tasks');
+  if (!savedTasks) return;
+  
+  const tasks = JSON.parse(savedTasks);
+  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  
+  days.forEach(day => {
+      const tasksContainer = document.getElementById(`tasks-${day}`);
+      tasksContainer.innerHTML = '';
+      if (tasks[day]) {
+          tasks[day].forEach(task => {
+              const newTask = createTaskElement();
+              tasksContainer.appendChild(newTask);
+              newTask.querySelector('.task-title').value = task.title;
+              newTask.querySelector('.task-time').value = task.time;
+              newTask.querySelector('.task-complete').checked = task.completed;
+              newTask.querySelector('.task-complete').addEventListener('change', () => updateProgress(day));
+          });
+          updateProgress(day);
+      }
+  });
+}
